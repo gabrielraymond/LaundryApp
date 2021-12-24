@@ -61,19 +61,22 @@ const Navbar = () => {
               )}
             >
               <li className="nav-item">
+                
                 <Link className="dropdown-item nav-link" to="/">
+                <i className="fas fa-user iconNav"></i>
                   Karyawan
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="dropdown-item nav-link" to="/">
+                <i className="fas fa-user iconNav"></i>
                   Administrator
                 </Link>
               </li>
             </ul>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/transaction">
               <i className="fas fa-user iconNav"></i>
               Transaksi
             </Link>
@@ -85,7 +88,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/customer">
               <i className="fas fa-user iconNav"></i>
               Customer
             </Link>

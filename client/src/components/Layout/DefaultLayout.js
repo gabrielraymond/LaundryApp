@@ -13,6 +13,11 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import PackagePage from "../../pages/package/PackagePage";
 import CreatePackage from "../../pages/package/CreatePackage";
 import EditPackage from "../../pages/package/EditPackage";
+import CustomerPage from "../../pages/customer/CustomerPage";
+import CreateCustomer from "../../pages/customer/CreateCustomer";
+import EditCustomer from "../../pages/customer/EditCustomer";
+import TransactionPage from "../../pages/transaction/TransactionPage";
+import CreateTransaction from "../../pages/transaction/CreateTransaction";
 
 
 const DefaultLayout = () => {
@@ -40,6 +45,11 @@ const DefaultLayout = () => {
             <PrivateRoute path="/paket" component={PackagePage} />
             <PrivateRoute path="/new_paket" component={CreatePackage} />
             <PrivateRoute path="/edit_paket/:id" component={EditPackage} />
+            <PrivateRoute path="/customer" component={CustomerPage} />
+            <PrivateRoute path="/new_customer" component={CreateCustomer} />
+            <PrivateRoute path="/edit_customer/:id" component={EditCustomer} />
+            <PrivateRoute path="/transaction" component={TransactionPage} />
+            <PrivateRoute path="/new_transaksi" component={CreateTransaction} />
           </div>
         </div>
       </div>

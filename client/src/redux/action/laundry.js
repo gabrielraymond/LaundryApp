@@ -1,5 +1,7 @@
 import axios from "axios";
 import {
+  CUSTOMER_ERROR,
+  CUSTOMER_LOADED,
   LAUNDRY_ERROR,
   LAUNDRY_LOADED,
   LAUNDRY_UPDATE,
@@ -7,6 +9,8 @@ import {
   PACKAGE_LOADED,
   PAYMENT_ERROR,
   PAYMENT_LOADED,
+  TRANSACTION_ERROR,
+  TRANSACTION_LOADED,
 } from "./types";
 
 //load Laundry
@@ -21,6 +25,8 @@ export const loadLaundry = (id) => async (dispatch) => {
     });
     dispatch(loadPayment(id));
     dispatch(loadPackage(id));
+    dispatch(loadCustomer(id));
+    dispatch(loadTransaction(id));
   } catch (error) {
     dispatch({
       type: LAUNDRY_ERROR,
@@ -56,6 +62,38 @@ export const loadPackage = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PACKAGE_ERROR,
+    });
+  }
+};
+
+export const loadCustomer = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:5000/api/customer/${id}/get_customers`
+    );
+    dispatch({
+      type: CUSTOMER_LOADED,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: CUSTOMER_ERROR,
+    });
+  }
+};
+
+export const loadTransaction = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:5000/api/transaction/${id}/get_transactions`
+    );
+    dispatch({
+      type: TRANSACTION_LOADED,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: TRANSACTION_ERROR,
     });
   }
 };

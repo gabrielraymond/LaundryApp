@@ -10,6 +10,7 @@ const laundryRoute = require('./routes/laundryRoute');
 const paymentRoute = require('./routes/paymentRoute');
 const packageRoute = require('./routes/packageRoute');
 const customerRoute = require('./routes/customerRoute');
+const transactionRoute = require('./routes/transactionRoute');
 
 
 //Connect DB
@@ -26,6 +27,7 @@ app.use("/api/laundry", laundryRoute);
 app.use("/api/payment", paymentRoute);
 app.use("/api/package", packageRoute);
 app.use("/api/customer", customerRoute);
+app.use("/api/transaction", transactionRoute);
 
 
 

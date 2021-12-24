@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { updateUser } from "../redux/action/auth";
 
 const EditProfile = ({ auth: { user, loading } }) => {
@@ -10,6 +11,7 @@ const EditProfile = ({ auth: { user, loading } }) => {
   const [phone_number, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (user) {
@@ -106,7 +108,7 @@ const EditProfile = ({ auth: { user, loading } }) => {
               </select>
             </div>
             <button className="btn btn-primary me-2">Update</button>
-            <button className="btn btn-danger">Cancel</button>
+            <button className="btn btn-danger" onClick={() => history.go(-1)}>Cancel</button>
           </form>
         </div>
       </div>
