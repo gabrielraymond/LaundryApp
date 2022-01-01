@@ -7,6 +7,9 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const USER_UPDATE = "USER_UPDATE";
 export const UPDATE_ERROR = "UPDATE_ERROR";
 
+export const EMPLOYEE_LOADED = "EMPLOYEE_LOADED";
+export const EMPLOYEE_ERROR = "EMPLOYEE_ERROR";
+
 export const LAUNDRY_LOADED = "LAUNDRY_LOADED";
 export const LAUNDRY_ERROR = "LAUNDRY_ERROR";
 export const LAUNDRY_UPDATE = "LAUNDRY_UPDATE";

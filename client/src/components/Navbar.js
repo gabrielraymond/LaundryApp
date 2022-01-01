@@ -27,7 +27,10 @@ const Navbar = () => {
             <p className="mb-0">adiministrator</p>
           </div>
         </div>
-        <ul className="dropdown-menu ms-3" aria-labelledby="navbarScrollingDropdown">
+        <ul
+          className="dropdown-menu ms-3"
+          aria-labelledby="navbarScrollingDropdown"
+        >
           <li>
             <Link className="dropdown-item" to="/edit">
               Edit Profile
@@ -46,71 +49,84 @@ const Navbar = () => {
               Dashboard
             </Link>
           </li>
-          
-          <li className="nav-item">
-            <div
-              className="dropdown-toggle nav-link"
-              role="button"
-              onClick={() => setDropdown(!dropdown)}
-            >
-              <i className="fas fa-money-bill-wave iconNav"></i> <span>Manajemen User</span>
-            </div>
-            <ul
-              className={"dropdown dropdown-container nav flex-column "+(
-                !dropdown && "active"
-              )}
-            >
-              <li className="nav-item">
-                
-                <Link className="dropdown-item nav-link" to="/">
-                <i className="fas fa-user iconNav"></i>
-                  Karyawan
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="dropdown-item nav-link" to="/">
-                <i className="fas fa-user iconNav"></i>
-                  Administrator
-                </Link>
-              </li>
-            </ul>
-          </li>
+          {user.status === "admin" && (
+            <li className="nav-item">
+              <div
+                className="dropdown-toggle nav-link"
+                role="button"
+                onClick={() => setDropdown(!dropdown)}
+              >
+                <i className="fas fa-money-bill-wave iconNav"></i>{" "}
+                <span>Manajemen User</span>
+              </div>
+              <ul
+                className={
+                  "dropdown dropdown-container nav flex-column " +
+                  (!dropdown && "active")
+                }
+              >
+                <li className="nav-item">
+                  <Link className="dropdown-item nav-link" to="/user/employees">
+                    <i className="fas fa-user iconNav"></i>
+                    Karyawan
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="dropdown-item nav-link"
+                    to="/user/administrator"
+                  >
+                    <i className="fas fa-user iconNav"></i>
+                    Administrator
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          )}
+
           <li className="nav-item">
             <Link className="nav-link" to="/transaction">
               <i className="fas fa-user iconNav"></i>
               Transaksi
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/paket">
-              <i className="fas fa-home iconNav"></i>
-              Paket Laundry
-            </Link>
-          </li>
+          {user.status === "admin" && (
+            <li className="nav-item">
+              <Link className="nav-link" to="/paket">
+                <i className="fas fa-home iconNav"></i>
+                Paket Laundry
+              </Link>
+            </li>
+          )}
           <li className="nav-item">
             <Link className="nav-link" to="/customer">
               <i className="fas fa-user iconNav"></i>
               Customer
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/pembayaran">
-              <i className="fas fa-money-bill-wave iconNav"></i>
-              Tipe Pembayaran
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/identitas">
-              <i className="fas fa-edit iconNav"></i>
-              Identitas Aplikasi
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
-              <i className="fas fa-book iconNav"></i>
-              Laporan
-            </Link>
-          </li>
+          {user.status === "admin" && (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/pembayaran">
+                  <i className="fas fa-money-bill-wave iconNav"></i>
+                  Tipe Pembayaran
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link className="nav-link" to="/identitas">
+                  <i className="fas fa-edit iconNav"></i>
+                  Identitas Aplikasi
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/laporan">
+                  <i className="fas fa-book iconNav"></i>
+                  Laporan
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
 
         {/* <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -121,7 +137,9 @@ const Navbar = () => {
         </h6> */}
       </div>
     </nav>
-  ) : (<h1>Loading...</h1>);
+  ) : (
+    <h1>Loading...</h1>
+  );
 };
 
 export default Navbar;

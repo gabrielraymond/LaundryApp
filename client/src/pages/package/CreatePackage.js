@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import PageTitle from "../../components/PageTitle";
 import { loadPackage } from "../../redux/action/laundry";
 
 const CreatePackage = ({ auth: { loading, user }, laundry: { packages } }) => {
@@ -34,12 +35,9 @@ const CreatePackage = ({ auth: { loading, user }, laundry: { packages } }) => {
 
   return !loading && packages ? (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ">
-        <h1 className="h2 text-dark">Tambah Tipe Pembayaran</h1>
-      </div>
+      <PageTitle title="TAMBAH TIPE PEMBAYARAN" />
       <div>
-        <div className="bg-light p-4">
-          <h5>TAMBAH TIPE PEMBAYARAN</h5>
+        <div className="bg-light p-3 rounded shadow-sm border">
           <form
             onSubmit={(e) => handleSubmit(e, user.laundry)}
           >

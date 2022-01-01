@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import PageTitle from "../../components/PageTitle";
 import { editLaundry } from "../../redux/action/laundry";
 
 const EditLaundry = ({ auth: { loading, user }, laundry: { laundry } }) => {
@@ -32,12 +34,9 @@ const EditLaundry = ({ auth: { loading, user }, laundry: { laundry } }) => {
 
   return !loading && laundry ? (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ">
-        <h1 className="h2 text-dark">Identitas Aplikasi</h1>
-      </div>
+      <PageTitle title="EDIT IDENTITAS APLIKASI" />
       <div>
-        <div className="bg-light p-4">
-          <h5>EDIT IDENTITAS APLIKASI</h5>
+        <div className="bg-light p-3 my-3 rounded shadow-sm border">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="">Nama Aplikasi</label>
@@ -80,12 +79,11 @@ const EditLaundry = ({ auth: { loading, user }, laundry: { laundry } }) => {
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
             </div>
-            <button className="btn btn-primary me-2">Update</button>
-            <button className="btn btn-danger">Cancel</button>
+            <button className="btn btn-primary me-2">Update</button><Link to="/dashboard">
+            <button className="btn btn-danger">Cancel</button></Link>
           </form>
         </div>
       </div>
-      {/* <canvas className="my-4 w-100" id="myChart" width="900" height="380"></canvas> */}
     </main>
   ) : (
     <h1>Loading...</h1>

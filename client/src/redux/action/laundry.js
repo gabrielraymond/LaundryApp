@@ -1,7 +1,10 @@
 import axios from "axios";
+import setAuthToken from "../../utils/setAuthToken";
 import {
   CUSTOMER_ERROR,
   CUSTOMER_LOADED,
+  EMPLOYEE_ERROR,
+  EMPLOYEE_LOADED,
   LAUNDRY_ERROR,
   LAUNDRY_LOADED,
   LAUNDRY_UPDATE,
@@ -27,6 +30,7 @@ export const loadLaundry = (id) => async (dispatch) => {
     dispatch(loadPackage(id));
     dispatch(loadCustomer(id));
     dispatch(loadTransaction(id));
+    dispatch(loadEmployee());
   } catch (error) {
     dispatch({
       type: LAUNDRY_ERROR,
@@ -94,6 +98,25 @@ export const loadTransaction = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: TRANSACTION_ERROR,
+    });
+  }
+};
+
+export const loadEmployee = () => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  try {
+    const res = await axios.get("http://localhost:5000/api/user/get_employees/");
+
+    dispatch({
+      type: EMPLOYEE_LOADED,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: EMPLOYEE_ERROR,
     });
   }
 };

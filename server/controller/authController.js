@@ -13,8 +13,36 @@ const getUser = async (req, res) => {
   }
 };
 
+const getEmployees = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (user.status !== "admin") {
+      return res.json({});
+    }
+    const employees = await User.find({ status: "employee" }).select(
+      "-password"
+    );
+    res.json(employees);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+const deleteEmployee = async (req, res) => {
+  try {
+    const employee = await User.findByIdAndDelete(req.params.id);
+    res.json(employee);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+};
+
 //Register
 const addUser = async (req, res) => {
+  const { name, address, phone_number, gender, status } = req.body;
+  const userFields = {};
   //Lets validate the data before we a user
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -28,12 +56,15 @@ const addUser = async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
   //Create a new User
-  const user = new User({
-    username: req.body.username,
-    password: hashedPassword,
-    status: req.body.status,
-    laundry: req.params.id
-  });
+  if (name) userFields.name = name;
+  if (address) userFields.address = address;
+  if (phone_number) userFields.phone_number = phone_number;
+  if (gender) userFields.gender = gender;
+  if (status) userFields.status = status;
+  userFields.username = req.body.username;
+  userFields.password = hashedPassword;
+  userFields.laundry = req.params.id;
+  const user = new User(userFields);
 
   try {
     const savedUser = await user.save();
@@ -68,7 +99,7 @@ const editUser = async (req, res) => {
   if (address) userFields.address = address;
   if (phone_number) userFields.phone_number = phone_number;
   if (gender) userFields.gender = gender;
-  if (status) userFields.name = name;
+  if (status) userFields.status = status;
 
   try {
     let user = await User.findById(req.params.id);
@@ -103,11 +134,11 @@ const login = async (req, res) => {
   try {
     //Create and assign a token
     const token = jwt.sign(
-        { user: { id: user._id } },
-        process.env.TOKEN_SECRET,
-        { expiresIn: 360000 }
-    )
-    res.header("auth-token", token).json({ token })
+      { user: { id: user._id } },
+      process.env.TOKEN_SECRET,
+      { expiresIn: 360000 }
+    );
+    res.header("auth-token", token).json({ token });
   } catch (error) {
     res.status(400).send(error);
   }
@@ -118,4 +149,6 @@ module.exports = {
   addUser,
   editUser,
   login,
+  getEmployees,
+  deleteEmployee,
 };

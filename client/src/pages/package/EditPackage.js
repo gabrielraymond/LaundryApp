@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import PageTitle from "../../components/PageTitle";
 
 const EditPackage = ({ auth: { loading, user }, laundry: { packages } }) => {
   const history = useHistory();
@@ -10,18 +11,15 @@ const EditPackage = ({ auth: { loading, user }, laundry: { packages } }) => {
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
-    if (id) {
-      async function foo() {
-        const res = await axios.get(
-          `http://localhost:5000/api/package/get_package/${id}`
-        );
-        // console.log(res.data);
-        setName(res.data.name);
-        setPrice(res.data.price);
+    const getPaket = () => {
+      if (packages && id) {
+        let paket = packages.filter((p) => p._id === id);
+        setName(paket[0].name);
+        setPrice(paket[0].price);
       }
-      foo();
-    }
-  }, [id]);
+    };
+    getPaket();
+  }, [id, packages]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,11 +40,9 @@ const EditPackage = ({ auth: { loading, user }, laundry: { packages } }) => {
 
   return !loading && packages ? (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ">
-        <h1 className="h2 text-dark">Tambah Tipe Pembayaran</h1>
-      </div>
-      <div>
-        <div className="bg-light p-4">
+      <PageTitle title="EDIT TIPE PEMBAYARAN" />
+      <div className="">
+        <div className=" bg-light my-3 p-3 bg-info border rounded shadow-sm">
           <h5>TAMBAH TIPE PEMBAYARAN</h5>
           <form onSubmit={(e) => handleSubmit(e, user.laundry)}>
             <div className="mb-3">

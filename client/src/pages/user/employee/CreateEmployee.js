@@ -1,112 +1,116 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import axios from "axios";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { updateUser } from "../redux/action/auth";
 
-const EditProfile = ({ auth: { user, loading } }) => {
+const CreateEmployee = ({
+  auth: { user, loading, isAuthenticated },
+  laundry: { employees },
+}) => {
+  const history = useHistory();
   const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [phone_number, setPhoneNumber] = useState("");
-  const [gender, setGender] = useState("");
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const [gender, setGender] = useState("Laki-laki");
 
-  useEffect(() => {
-    if (user) {
-      setName(user.name);
-      setAddress(user.address);
-      setPhoneNumber(user.phone_number);
-      setGender(user.gender);
-    }
-  }, [user]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e, laundry) => {
     e.preventDefault();
-    const data = JSON.stringify({
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const status = "employee";
+
+    const body = JSON.stringify({
       name,
+      username,
       password,
       address,
       phone_number,
       gender,
+      status,
     });
-    dispatch(updateUser(user._id, data));
-    setPassword("");
+    await axios.post(
+      `http://localhost:5000/api/user/register/${laundry}`,
+      body,
+      config
+    );
+    history.go(-1);
   };
 
-  return !loading && user ? (
+  return !loading && employees ? (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
       <div className="my-3 p-3 bg-dark text-light rounded shadow-sm">
-        <h3 className="panel-title">EDIT DATA ADMINISTRATOR</h3>
+        <h3 className="panel-title">TAMBAH KARYAWAN</h3>
       </div>
       <div>
         <div className="bg-light my-3 p-3 rounded shadow-sm border">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => handleSubmit(e, user.laundry)}>
             <div className="mb-3">
-              <label className="">Nama Lengkap</label>
+              <label className="">Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="full-name"
+                id="employee-name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Username</label>
+              <label className="">Username</label>
               <input
                 type="text"
                 className="form-control"
-                id="username"
-                value={user.username}
-                aria-label="Disabled input example"
-                disabled
+                id="employee-username"
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
               />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Password</label>
+              <label className="">Password</label>
               <input
                 type="password"
                 className="form-control"
-                id="password"
-                placeholder="Masukkan Password"
+                id="employee-password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Alamat Lengkap</label>
+              <label className="">Address</label>
               <input
                 type="text"
                 className="form-control"
-                id="alamat"
+                id="employee-address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
               />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Telepon</label>
+              <label className="">Phone Number</label>
               <input
                 type="text"
                 className="form-control"
-                id="telepon"
+                id="employee-phone-number"
                 value={phone_number}
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Gender</label>
+              <label className="">Gender</label>
               <select
                 className="form-select"
-                onChange={(e) => setGender(e.target.value)}
+                type="text"
+                name="gender"
                 value={gender}
+                onChange={(e) => setGender(e.target.value)}
               >
                 <option value="Laki-laki">Laki-laki</option>
                 <option value="Perempuan">Perempuan</option>
               </select>
             </div>
-            <button className="btn btn-primary me-2">Update</button>
-            <button className="btn btn-danger" onClick={() => history.go(-1)}>
+            <button className="btn btn-primary me-2" type="submit">
+              Update
+            </button>
+            <button
+              className="btn btn-danger"
+              type="button"
+              onClick={() => history.go(-1)}
+            >
               Cancel
             </button>
           </form>
@@ -121,6 +125,7 @@ const EditProfile = ({ auth: { user, loading } }) => {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  laundry: state.laundry,
 });
 
-export default connect(mapStateToProps)(EditProfile);
+export default connect(mapStateToProps)(CreateEmployee);

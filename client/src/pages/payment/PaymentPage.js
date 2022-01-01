@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import PageTitle from "../../components/PageTitle";
 import { loadPayment } from "../../redux/action/laundry";
 
 const PaymentPage = ({
@@ -17,7 +18,6 @@ const PaymentPage = ({
         `http://localhost:5000/api/payment/delete/${payment_id}`
       );
       dispatch(loadPayment(payment_laundry));
-      // dispatch(deletePayment(payment.laundry, payment._id));
     } catch (error) {
       console.error(error);
     }
@@ -25,21 +25,13 @@ const PaymentPage = ({
 
   return !loading && user && payments ? (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2 text-dark">Tipe Pembayaran</h1>
-        <div className="btn-toolbar mb-2 mb-md-0">
-          <div className="btn-group me-2"></div>
-        </div>
-      </div>
+      <PageTitle title="TIPE PEMBAYARAN" />
 
-      {/* <canvas className="my-4 w-100" id="myChart" width="900" height="380"></canvas> */}
-
-      <h2>Section title</h2>
-      <Link className="btn btn-secondary" to="/new_payment">
-        <i className="fas fa-edit iconNav"></i>
-        Tambah Tipe Pembayaran
-      </Link>
-      <div className="table-responsive">
+      <div className="table-responsive my-3 p-3 rounded shadow-sm">
+        <Link className="btn btn-secondary" to="/new_payment">
+          <i className="fas fa-edit iconNav"></i>
+          Tambah Tipe Pembayaran
+        </Link>
         <table className="table table-striped table-sm">
           <thead>
             <tr>

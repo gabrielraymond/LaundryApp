@@ -3,12 +3,13 @@ import axios from "axios";
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { loadPackage } from "../../redux/action/laundry";
+import PageTitle from "../../components/PageTitle";
 
 const PackagePage = ({
   auth: { user, loading, isAuthenticated },
   laundry: { packages },
 }) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleDelete = async (e, paket_id, paket_laundry) => {
     e.preventDefault();
@@ -25,19 +26,13 @@ const PackagePage = ({
 
   return !loading && user && packages ? (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2 text-dark">Paket Laundry</h1>
-        <div className="btn-toolbar mb-2 mb-md-0">
-          <div className="btn-group me-2"></div>
-        </div>
-      </div>
+      <PageTitle title="PAKET LAUNDRY" />
 
-      <h2>DATA PAKET LAUNDRY</h2>
-      <Link className="btn btn-secondary" to="/new_paket">
-        <i className="fas fa-edit iconNav"></i>
-        Tambah Paket Laundry
-      </Link>
-      <div className="table-responsive">
+      <div className="table-responsive  my-3 p-3 bg-body border rounded shadow-sm">
+        <Link className="btn btn-secondary" to="/new_paket">
+          <i className="fas fa-edit iconNav"></i>
+          Tambah Paket Laundry
+        </Link>
         <table className="table table-striped table-sm">
           <thead>
             <tr>

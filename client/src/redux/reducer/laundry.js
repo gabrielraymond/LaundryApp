@@ -10,6 +10,8 @@ import {
   CUSTOMER_ERROR,
   TRANSACTION_LOADED,
   TRANSACTION_ERROR,
+  EMPLOYEE_LOADED,
+  EMPLOYEE_ERROR,
 } from "../action/types";
 
 const initialState = {
@@ -19,6 +21,7 @@ const initialState = {
   packages: null,
   customers: null,
   transactions: null,
+  employees: null
 };
 
 export default function foo(state = initialState, action) {
@@ -56,11 +59,18 @@ export default function foo(state = initialState, action) {
         loading: false,
         transactions: payload,
       };
+    case EMPLOYEE_LOADED:
+      return {
+        ...state,
+        loading: false,
+        employees: payload,
+      };
     case LAUNDRY_ERROR:
     case PAYMENT_ERROR:
     case PACKAGE_ERROR:
     case CUSTOMER_ERROR:
     case TRANSACTION_ERROR:
+    case EMPLOYEE_ERROR:
       return {
         ...state,
         loading: false,

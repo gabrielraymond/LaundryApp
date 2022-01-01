@@ -8,20 +8,16 @@ const TransactionPage = ({
 }) => {
   return !loading && user && transactions ? (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2 text-dark">Transactions</h1>
-        <div className="btn-toolbar mb-2 mb-md-0">
-          <div className="btn-group me-2"></div>
-        </div>
+      <div className="my-3 p-3 bg-dark text-light rounded shadow-sm">
+        <h3 className="panel-title">TRANSAKSI</h3>
       </div>
+      <div className="table-responsive my-3 p-3 bg-body rounded shadow-sm border">
+        <Link className="btn btn-secondary" to="/new_transaksi">
+          <i className="fas fa-edit iconNav"></i>
+          Tambah Transaksi
+        </Link>
 
-      <h2>DATA TRANSACTIONS</h2>
-      <Link className="btn btn-secondary" to="/new_transaksi">
-        <i className="fas fa-edit iconNav"></i>
-        Tambah Customer
-      </Link>
-      <div className="table-responsive">
-        <table className="table table-striped table-sm">
+        <table className="table table-striped table-sm ">
           <thead>
             <tr>
               <th scope="col">No</th>
@@ -40,7 +36,13 @@ const TransactionPage = ({
                 transactions && (
                   <tr key={transaction._id}>
                     <td>{i + 1}</td>
-                    <td>{transaction.order_date.toLocaleString()}</td>
+                    <td>
+                      {transaction.order_date
+                        .split("T")[0]
+                        .split("-")
+                        .reverse()
+                        .join("/")}
+                    </td>
                     <td>
                       <div className="btn btn-success">
                         {transaction.payment_status}
@@ -50,20 +52,27 @@ const TransactionPage = ({
                     <td>
                       <ul>
                         {transaction.order.map((o) => {
-                          return <li>{o.paket} ({o.quantity})</li>;
+                          return (
+                            <li key={o._id}>
+                              {o.paket} ({o.quantity})
+                            </li>
+                          );
                         })}
                       </ul>
                     </td>
-                    <td><div className="btn btn-info">{transaction.status_order}</div></td>
+                    <td>
+                      <div className="btn btn-info">
+                        {transaction.status_order}
+                      </div>
+                    </td>
                     <td>{transaction.subtotal}</td>
                     <td>
                       <Link
                         className="btn btn-primary"
-                        // to={`/edit_customer/${customer._id}`}
+                        to={`/edit_transaksi/${transaction._id}`}
                       >
                         Detail
                       </Link>
-                      
                     </td>
                   </tr>
                 )
