@@ -50,7 +50,7 @@ const Login = () => {
     //     </form>
     //   </div>
     // </div>
-    <section class="vh-100 gradient-custom">
+    <section className="vh-100 gradient-custom">
       {isAuthenticated ? <Redirect to="/dashboard" /> : ""}
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">

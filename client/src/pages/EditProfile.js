@@ -5,13 +5,13 @@ import { useHistory } from "react-router-dom";
 import { updateUser } from "../redux/action/auth";
 
 const EditProfile = ({ auth: { user, loading } }) => {
+  const history = useHistory();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [phone_number, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
   const dispatch = useDispatch();
-  const history = useHistory();
 
   useEffect(() => {
     if (user) {
@@ -33,6 +33,7 @@ const EditProfile = ({ auth: { user, loading } }) => {
     });
     dispatch(updateUser(user._id, data));
     setPassword("");
+    history.go(-1);
   };
 
   return !loading && user ? (

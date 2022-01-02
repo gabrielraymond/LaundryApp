@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
+import { loadCustomer } from "../../redux/action/laundry";
 
 const EditCustomer = ({ auth: { loading, user }, laundry: { customers } }) => {
   const history = useHistory();
   const { id } = useParams();
+  const dispatch = useDispatch()
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
@@ -41,6 +43,8 @@ const EditCustomer = ({ auth: { loading, user }, laundry: { customers } }) => {
       body,
       config
     );
+    dispatch(loadCustomer(user.laundry));
+
     history.go(-1);
   };
 

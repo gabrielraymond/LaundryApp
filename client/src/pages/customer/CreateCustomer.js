@@ -31,7 +31,7 @@ const CreateCustomer = ({
         data,
         config
       );
-      dispatch(loadCustomer);
+      dispatch(loadCustomer(id));
     } catch (error) {
       console.error(error);
     }

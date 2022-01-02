@@ -31,7 +31,7 @@ const TransactionPage = ({
             </tr>
           </thead>
           <tbody>
-            {transactions.map((transaction, i = 0) => {
+            {transactions.reverse().map((transaction, i = 0) => {
               return (
                 transactions && (
                   <tr key={transaction._id}>

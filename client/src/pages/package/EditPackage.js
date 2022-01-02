@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
+import { loadPackage } from "../../redux/action/laundry";
 
 const EditPackage = ({ auth: { loading, user }, laundry: { packages } }) => {
   const history = useHistory();
   const { id } = useParams();
+  const dispatch = useDispatch()
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
 
@@ -35,6 +37,8 @@ const EditPackage = ({ auth: { loading, user }, laundry: { packages } }) => {
       body,
       config
     );
+    dispatch(loadPackage(user.laundry))
+
     history.go(-1);
   };
 

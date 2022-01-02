@@ -168,7 +168,7 @@ const TransactionDetails = ({
           </tbody>
           <tbody>
             <tr>
-              <td colspan="4">
+              <td colSpan="4">
                 <center>Total Pesanan</center>
               </td>
               <td></td>

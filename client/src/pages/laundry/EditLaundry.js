@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
 import { editLaundry } from "../../redux/action/laundry";
 
 const EditLaundry = ({ auth: { loading, user }, laundry: { laundry } }) => {
+  const history = useHistory();
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
@@ -30,6 +31,7 @@ const EditLaundry = ({ auth: { loading, user }, laundry: { laundry } }) => {
           phone_number
       });
       dispatch(editLaundry(user.laundry, data))
+      history.go(-1);
   }
 
   return !loading && laundry ? (

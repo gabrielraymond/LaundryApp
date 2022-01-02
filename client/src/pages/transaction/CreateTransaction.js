@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
-import { loadCustomer } from "../../redux/action/laundry";
+import { loadTransaction } from "../../redux/action/laundry";
 
 const CreateTransaction = ({
   auth: { loading, user },
@@ -102,6 +102,7 @@ const CreateTransaction = ({
         "-" +
         today.getDate();
       setData((data["order_date"] = date));
+      console.log(date);
     }
 
     if (formValues) {
@@ -129,8 +130,9 @@ const CreateTransaction = ({
         config
       );
     } catch (error) {
-      dispatch(loadCustomer);
+      console.error(error);
     }
+    dispatch(loadTransaction(user.laundry));
 
     history.go(-1);
   };
@@ -138,14 +140,16 @@ const CreateTransaction = ({
   return !loading && customers && packages && payments && transactions ? (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <PageTitle title="ORDER LAUNDRY" />
-      
+
       <div className="rounded shadow-sm">
         <div className="bg-light p-4">
           <div className="d-flex justify-content-between bg-secondary rounded text-white p-3 mb-3">
             <h3 className="ps-2">Customer belum terdaftar?</h3>
-            <Link to="/new_customer" className="btn btn-warning">+ Customer Baru</Link>
+            <Link to="/new_customer" className="btn btn-warning">
+              + Customer Baru
+            </Link>
           </div>
-          
+
           <form onSubmit={(e) => handleSubmit(e, user.laundry)}>
             <div className="mb-3">
               <label className="">No. Order</label>
@@ -280,7 +284,11 @@ const CreateTransaction = ({
             <button className="btn btn-primary me-2" type="submit">
               Create
             </button>
-            <button className="btn btn-danger" type="button" onClick={() => history.go(-1)}>
+            <button
+              className="btn btn-danger"
+              type="button"
+              onClick={() => history.go(-1)}
+            >
               Cancel
             </button>
           </form>

@@ -47,13 +47,12 @@ const Laporan = ({
           type="submit"
           name="button"
           id="button"
-          class="stdbtn ms-2"
+          className="stdbtn ms-2"
           value="Print Laporan"
           onClick={() => window.print()}
         />
         
-        {console.log(find.split("T")[0].split("-")[2])}
-        <table class="table" border="2">
+        <table className="table" border="2">
           <thead>
             <tr>
               <th>
@@ -88,7 +87,7 @@ const Laporan = ({
               .map((t, i) => {
                 total = t.subtotal + total;
                 return (
-                  <tr>
+                  <tr key={t._id}>
                     <td>{i + 1}</td>
                     <td>
                       {
