@@ -21,7 +21,7 @@ const CreatePackage = ({ auth: { loading, user }, laundry: { packages } }) => {
     const data = JSON.stringify({name, price});
     try {
         await axios.post(
-            `http://localhost:5000/api/package/${id}/add_package`,
+            `https://mern-laundry.herokuapp.com/api/package/${id}/add_package`,
             data,
             config
         );

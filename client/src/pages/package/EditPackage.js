@@ -33,7 +33,7 @@ const EditPackage = ({ auth: { loading, user }, laundry: { packages } }) => {
 
     const body = JSON.stringify({ name });
     await axios.post(
-      `http://localhost:5000/api/package/update/${id}`,
+      `https://mern-laundry.herokuapp.com/api/package/update/${id}`,
       body,
       config
     );

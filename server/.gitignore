@@ -2,11 +2,12 @@
 
 # dependencies
 node_modules
-node_modules/
-/server/node_modules/
-/client/node_modules/
+/node_modules
 /.pnp
 .pnp.js
+npm-debug.log
+.DS_Store
+/*.env
 
 # testing
 /coverage

@@ -27,7 +27,7 @@ const CreateCustomer = ({
     const data = JSON.stringify({ name, address, email, phone_number, gender });
     try {
       await axios.post(
-        `http://localhost:5000/api/customer/${id}/add_customer`,
+        `https://mern-laundry.herokuapp.com/api/customer/${id}/add_customer`,
         data,
         config
       );

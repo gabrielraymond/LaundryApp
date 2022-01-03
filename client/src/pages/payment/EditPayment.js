@@ -31,7 +31,7 @@ const EditPayment = ({ auth: { loading, user }, laundry: { payments } }) => {
 
     const body = JSON.stringify({name});
     await axios.post(
-      `http://localhost:5000/api/payment/update/${id}`,
+      `https://mern-laundry.herokuapp.com/api/payment/update/${id}`,
       body,
       config
     );

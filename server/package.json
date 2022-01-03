@@ -4,8 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -21,5 +20,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "14.x",
+    "npm": "8.x"
   }
 }

@@ -125,7 +125,7 @@ const CreateTransaction = ({
     };
     try {
       await axios.post(
-        `http://localhost:5000/api/transaction/${id}/add_transaction`,
+        `https://mern-laundry.herokuapp.com/api/transaction/${id}/add_transaction`,
         data,
         config
       );

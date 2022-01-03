@@ -15,7 +15,7 @@ const PaymentPage = ({
     e.preventDefault();
     try {
       await axios.delete(
-        `http://localhost:5000/api/payment/delete/${payment_id}`
+        `https://mern-laundry.herokuapp.com/api/payment/delete/${payment_id}`
       );
       dispatch(loadPayment(payment_laundry));
     } catch (error) {

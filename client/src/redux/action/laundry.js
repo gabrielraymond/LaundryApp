@@ -20,7 +20,7 @@ import {
 export const loadLaundry = (id) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `http://localhost:5000/api/laundry/get_laundry/${id}`
+      `https://mern-laundry.herokuapp.com/api/laundry/get_laundry/${id}`
     );
     dispatch({
       type: LAUNDRY_LOADED,
@@ -41,7 +41,7 @@ export const loadLaundry = (id) => async (dispatch) => {
 export const loadPayment = (id) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `http://localhost:5000/api/payment/${id}/get_payments`
+      `https://mern-laundry.herokuapp.com/api/payment/${id}/get_payments`
     );
     dispatch({
       type: PAYMENT_LOADED,
@@ -57,7 +57,7 @@ export const loadPayment = (id) => async (dispatch) => {
 export const loadPackage = (id) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `http://localhost:5000/api/package/${id}/get_packages`
+      `https://mern-laundry.herokuapp.com/api/package/${id}/get_packages`
     );
     dispatch({
       type: PACKAGE_LOADED,
@@ -73,7 +73,7 @@ export const loadPackage = (id) => async (dispatch) => {
 export const loadCustomer = (id) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `http://localhost:5000/api/customer/${id}/get_customers`
+      `https://mern-laundry.herokuapp.com/api/customer/${id}/get_customers`
     );
     dispatch({
       type: CUSTOMER_LOADED,
@@ -89,7 +89,7 @@ export const loadCustomer = (id) => async (dispatch) => {
 export const loadTransaction = (id) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `http://localhost:5000/api/transaction/${id}/get_transactions`
+      `https://mern-laundry.herokuapp.com/api/transaction/${id}/get_transactions`
     );
     dispatch({
       type: TRANSACTION_LOADED,
@@ -108,7 +108,7 @@ export const loadEmployee = () => async (dispatch) => {
   }
 
   try {
-    const res = await axios.get("http://localhost:5000/api/user/get_employees/");
+    const res = await axios.get("https://mern-laundry.herokuapp.com/api/user/get_employees/");
 
     dispatch({
       type: EMPLOYEE_LOADED,
@@ -171,7 +171,7 @@ export const editLaundry = (id, body) => async (dispatch) => {
   };
   try {
     const res = await axios.post(
-      `http://localhost:5000/api/laundry/edit_laundry/${id}`,
+      `https://mern-laundry.herokuapp.com/api/laundry/edit_laundry/${id}`,
       body,
       config
     );

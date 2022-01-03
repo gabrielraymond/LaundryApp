@@ -21,7 +21,7 @@ const CreatePayment = ({ auth: { loading, user }, laundry: { payments } }) => {
     const data = JSON.stringify({ name });
     try {
       await axios.post(
-        `http://localhost:5000/api/payment/${id}/add_payment`,
+        `https://mern-laundry.herokuapp.com/api/payment/${id}/add_payment`,
         data,
         config
       );

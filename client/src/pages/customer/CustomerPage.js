@@ -14,7 +14,7 @@ const CustomerPage = ({
     e.preventDefault();
     try {
       await axios.delete(
-        `http://localhost:5000/api/customer/delete/${customer_id}`
+        `https://mern-laundry.herokuapp.com/api/customer/delete/${customer_id}`
       );
       dispatch(loadCustomer(customer_laundry));
       // dispatch(deletePayment(payment.laundry, payment._id));

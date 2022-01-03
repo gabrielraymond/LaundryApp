@@ -17,7 +17,7 @@ export const loadUser = () => async (dispatch) => {
   }
 
   try {
-    const res = await axios.get("http://localhost:5000/api/user/get_user/");
+    const res = await axios.get("https://mern-laundry.herokuapp.com/api/user/get_user/");
 
     dispatch({
       type: USER_LOADED,
@@ -39,7 +39,7 @@ export const updateUser = (id, body) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.post(`http://localhost:5000/api/user/edit_user/${id}`, body, config)
+    const res = await axios.post(`https://mern-laundry.herokuapp.com/api/user/edit_user/${id}`, body, config)
     dispatch({
       type: USER_UPDATE,
       payload: res.data,
@@ -61,7 +61,7 @@ export const login = (body) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/user/login",
+      "https://mern-laundry.herokuapp.com/api/user/login",
       body,
       config
     );

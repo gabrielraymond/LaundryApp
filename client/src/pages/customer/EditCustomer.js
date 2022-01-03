@@ -39,7 +39,7 @@ const EditCustomer = ({ auth: { loading, user }, laundry: { customers } }) => {
 
     const body = JSON.stringify({ name, address, email, phone_number, gender });
     await axios.post(
-      `http://localhost:5000/api/customer/update/${id}`,
+      `https://mern-laundry.herokuapp.com/api/customer/update/${id}`,
       body,
       config
     );

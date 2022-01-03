@@ -26,13 +26,13 @@ const TransactionDetails = ({
     };
     if (e.target.name === "payment_status") {
       await axios.post(
-        `http://localhost:5000/api/transaction/update/${id}`,
+        `https://mern-laundry.herokuapp.com/api/transaction/update/${id}`,
         { payment_status: e.target.value },
         config
       );
     } else if (e.target.name === "status_order") {
       await axios.post(
-        `http://localhost:5000/api/transaction/update/${id}`,
+        `https://mern-laundry.herokuapp.com/api/transaction/update/${id}`,
         { status_order: e.target.value },
         config
       );
