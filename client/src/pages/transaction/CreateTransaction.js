@@ -102,7 +102,7 @@ const CreateTransaction = ({
         "-" +
         today.getDate();
       setData((data["order_date"] = date));
-      console.log(date);
+      
     }
 
     if (formValues) {
@@ -116,7 +116,6 @@ const CreateTransaction = ({
       setData((data["status_order"] = "Baru"));
     }
 
-    console.log(data);
 
     const config = {
       headers: {

@@ -64,7 +64,7 @@ const Dashboard = ({
                 find
                   ? t.name.toLowerCase().includes(find.toLowerCase())
                   : t.status_order === "Baru"
-              ).reverse()
+              )
               .map((transaction, i = 0) => {
                 return (
                   transactions && (

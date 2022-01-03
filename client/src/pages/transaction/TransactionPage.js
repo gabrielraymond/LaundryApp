@@ -6,6 +6,27 @@ const TransactionPage = ({
   auth: { user, loading, isAuthenticated },
   laundry: { transactions },
 }) => {
+  const handleColorPayment = (p) => {
+    if (p === "Lunas") {
+      return "btn btn-success";
+    } else if (p === "Belum Lunas") {
+      return "btn btn-warning";
+    }
+  };
+  const handleColorStatus = (p) => {
+    if (p === "Baru") {
+      return "btn btn-info";
+    } else if (p === "Proses") {
+      return "btn btn-secondary";
+    } else if (p === "Selesai") {
+      return "btn btn-warning";
+    } else if (p === "Batal") {
+      return "btn btn-danger";
+    } else if (p === "Diambil") {
+      return "btn btn-success";
+    }
+  };
+
   return !loading && user && transactions ? (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div className="my-3 p-3 bg-dark text-light rounded shadow-sm">
@@ -31,7 +52,7 @@ const TransactionPage = ({
             </tr>
           </thead>
           <tbody>
-            {transactions.reverse().map((transaction, i = 0) => {
+            {transactions.map((transaction, i = 0) => {
               return (
                 transactions && (
                   <tr key={transaction._id}>
@@ -44,7 +65,11 @@ const TransactionPage = ({
                         .join("/")}
                     </td>
                     <td>
-                      <div className="btn btn-success">
+                      <div
+                        className={handleColorPayment(
+                          transaction.payment_status
+                        )}
+                      >
                         {transaction.payment_status}
                       </div>
                     </td>
@@ -61,7 +86,7 @@ const TransactionPage = ({
                       </ul>
                     </td>
                     <td>
-                      <div className="btn btn-info">
+                      <div className={handleColorStatus(transaction.status_order)}>
                         {transaction.status_order}
                       </div>
                     </td>

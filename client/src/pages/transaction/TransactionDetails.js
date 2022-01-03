@@ -1,13 +1,16 @@
 import axios from "axios";
 import React from "react";
-import { connect } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { connect, useDispatch } from "react-redux";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { loadTransaction } from "../../redux/action/laundry";
 
 const TransactionDetails = ({
   auth: { user, loading, isAuthenticated },
   laundry: { transactions },
 }) => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const history = useHistory();
   let transaction = null;
   const getTransaction = () => {
     if (transactions && id) {
@@ -40,6 +43,11 @@ const TransactionDetails = ({
 
     console.log(e.target.value);
   };
+
+  const handleBack = () => {
+    dispatch(loadTransaction(user.laundry))
+    history.go(-1);
+  }
 
   return !loading && user && transactions ? (
     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -176,13 +184,15 @@ const TransactionDetails = ({
             </tr>
           </tbody>
         </table>
-
+        <button className="btn btn-primary" onClick={() => handleBack()}>Process Order</button>
         <Link
           to={`/invoice/${user.laundry}/${transaction[0]._id}`}
           target="_blank"
         >
-          <button className="btn btn-info">Cetak Invoice</button>
+          <button className="btn btn-outline-warning ms-2">Cetak Invoice</button>
         </Link>
+
+        
       </div>
     </main>
   ) : (

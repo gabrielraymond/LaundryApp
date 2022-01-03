@@ -93,7 +93,7 @@ export const loadTransaction = (id) => async (dispatch) => {
     );
     dispatch({
       type: TRANSACTION_LOADED,
-      payload: res.data,
+      payload: res.data.reverse(),
     });
   } catch (error) {
     dispatch({
