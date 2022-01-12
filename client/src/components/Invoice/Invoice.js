@@ -239,6 +239,150 @@ const Invoice = ({
               milik kami
             </div>
           </div>
+          <div className="invoice-note">
+            <table cellSpacing="0" cellPadding="0" border="0" width="100%">
+              <tbody>
+                <tr>
+                  <td valign="top" align="left" width="50%">
+                    <table cellSpacing="0" cellPadding="0" border="0">
+                      <tbody>
+                        <tr>
+                          <td valign="top" width="">
+                            <strong>
+                              <span
+                                className="editable-text"
+                                id="label_bill_to"
+                              >
+                                Customer
+                              </span>
+                            </strong>
+                          </td>
+                          <td valign="top">
+                            <div className="client_info">
+                              <table cellSpacing="0" cellPadding="0" border="0">
+                                <tbody>
+                                  <tr>
+                                    <td style={{ paddingLeft: "25px" }}>
+                                      <span
+                                        className="editable-area"
+                                        id="client_info"
+                                      >
+                                        {transaction[0].name}
+                                        <br />
+                                        {transaction[0].address}
+                                        <br />
+                                        Telp: {transaction[0].phone_number}
+                                      </span>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td valign="top" align="right" width="50%">
+                    <table cellSpacing="0" cellPadding="0" border="0">
+                      <tbody>
+                        <tr>
+                          <td align="right">
+                            <strong>
+                              <span
+                                className="editable-text"
+                                id="label_invoice_no"
+                              >
+                                No. Order
+                              </span>
+                            </strong>
+                          </td>
+                          <td style={{ paddingLeft: "20px" }} align="left">
+                            <span className="editable-text" id="no">
+                              {transaction[0].no_order}
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="right">
+                            <strong>
+                              <span className="editable-text" id="label_date">
+                                Tgl. Transaksi
+                              </span>
+                            </strong>
+                          </td>
+                          <td style={{ paddingLeft: "20px" }} align="left">
+                            <span className="editable-text" id="date">
+                              {transaction[0].order_date
+                                .split("T")[0]
+                                .split("-")
+                                .reverse()
+                                .join("/")}
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="right">
+                            <strong>
+                              <span className="editable-text" id="label_date">
+                                Tgl. Ambil
+                              </span>
+                            </strong>
+                          </td>
+                          <td style={{ paddingLeft: "20px" }} align="left">
+                            <span className="editable-text" id="date">
+                              {transaction[0].pick_up_date
+                                .split("T")[0]
+                                .split("-")
+                                .reverse()
+                                .join("/")}
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="items-list">
+            <table className="table table-bordered table-condensed table-striped items-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Paket Laundry</th>
+                  <th>Berat/KG</th>
+                  <th>Harga</th>
+                  <th width="100">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                {transaction[0].order.map((o, i = 0) => {
+              return (
+                <tr>
+                  <td>{i + 1}</td>
+                  <td>{o.paket}</td>
+                  <td>{o.quantity}</td>
+                  <td>Rp.{o.price},-</td>
+                  <td>Rp.{o.quantity * o.price},-</td>
+                </tr>
+              );
+            })}
+              </tbody>
+
+              <tfoot>
+                <tr className="totals-row">
+                  <td colSpan="3" className="wide-cell"></td>
+                  <td>
+                    <strong>Total</strong>
+                  </td>
+                  <td coslpan="2">Rp.{transaction[0].subtotal},-</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
           &nbsp;
         </div>
       </div>

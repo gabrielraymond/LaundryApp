@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/action/auth";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const loading = useSelector((state) => state.auth.loading);
   return !loading && user ? (
@@ -37,9 +39,12 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link className="dropdown-item" to="/">
+            <button
+              className="dropdown-item"
+              onClick={() => dispatch(logout())}
+            >
               Logout
-            </Link>
+            </button>
           </li>
         </ul>
         <ul className="nav flex-column">

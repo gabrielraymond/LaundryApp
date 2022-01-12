@@ -1,0 +1,12 @@
+@media screen and (max-width: 765px) {
+  header {
+    height: 55px;
+  }
+  .navbar-nav .nav-item {
+    display: none;
+  }
+
+  .sidebar {
+    top: 0;
+  }
+}
